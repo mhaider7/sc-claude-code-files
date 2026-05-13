@@ -11,6 +11,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from datetime import datetime, timedelta
 import warnings
+import os
 
 # Import custom modules
 from data_loader import EcommerceDataLoader, load_and_process_data
@@ -102,7 +103,8 @@ st.markdown("""
 def load_dashboard_data():
     """Load and cache data for dashboard"""
     try:
-        loader, processed_data = load_and_process_data('ecommerce_data/')
+        _data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ecommerce_data', '')
+        loader, processed_data = load_and_process_data(_data_path)
         return loader, processed_data
     except Exception as e:
         st.error(f"Error loading data: {str(e)}")

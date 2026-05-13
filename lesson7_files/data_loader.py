@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 from typing import Dict, Tuple, Optional
 import warnings
+import os
 
 warnings.filterwarnings('ignore')
 
@@ -44,7 +45,7 @@ class EcommerceDataLoader:
         
         for key, filename in file_mappings.items():
             try:
-                self.raw_data[key] = pd.read_csv(f"{self.data_path}{filename}")
+                self.raw_data[key] = pd.read_csv(os.path.join(self.data_path, filename))
                 print(f"Loaded {key}: {len(self.raw_data[key])} records")
             except FileNotFoundError:
                 print(f"Warning: {filename} not found, skipping...")
